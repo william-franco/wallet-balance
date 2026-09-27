@@ -15,14 +15,14 @@ Cartão de crédito full-stack: limite, fatura aberta, extrato de transações e
 ```
 wallet-balance/
 ├── WalletBalanceBackend/     → [README do backend](WalletBalanceBackend/README.md)
-└── wallet_balance_app/       → [README do app](wallet_balance_app/README.md)
+└── wallet-balance-app/       → [README do app](wallet-balance-app/README.md)
 ```
 
 Documentação complementar:
 
 | Documento | Conteúdo |
 |-----------|----------|
-| [`wallet_balance_app/README.md`](wallet_balance_app/README.md) | Arquitetura Flutter, testes, coverage, screenshots |
+| [`wallet-balance-app/README.md`](wallet-balance-app/README.md) | Arquitetura Flutter, testes, coverage, screenshots |
 | [`WalletBalanceBackend/README.md`](WalletBalanceBackend/README.md) | Pacotes, migrations, execução e URLs da API |
 
 ## Pré-requisitos
@@ -46,18 +46,18 @@ Para migrations, pacotes e Scalar, consulte [`WalletBalanceBackend/README.md`](W
 ### 2. App Flutter
 
 ```bash
-cd wallet_balance_app
+cd wallet-balance-app
 flutter pub get
 flutter run
 ```
 
 > O backend deve estar em execução antes de cadastrar, autenticar ou usar o dashboard.
 
-Para arquitetura, testes e coverage, consulte [`wallet_balance_app/README.md`](wallet_balance_app/README.md).
+Para arquitetura, testes e coverage, consulte [`wallet-balance-app/README.md`](wallet-balance-app/README.md).
 
 ## Integração app ↔ API
 
-Base URL configurada em `wallet_balance_app/lib/src/common/constants/api_constant.dart`:
+Base URL configurada em `wallet-balance-app/lib/src/common/constants/api_constant.dart`:
 
 | Plataforma | URL |
 |------------|-----|

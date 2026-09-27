@@ -4,7 +4,7 @@ on: [push]
 
 defaults:
   run:
-    working-directory: wallet_balance_app
+    working-directory: wallet-balance-app
 
 jobs:
   build:
