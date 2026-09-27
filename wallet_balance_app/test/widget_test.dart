@@ -1,30 +1,24 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-
-import 'package:wallet_balance_app/main.dart';
+import 'package:wallet_balance_app/src/features/wallet/models/card_summary_model.dart';
+import 'package:wallet_balance_app/src/features/wallet/widgets/legacy_credit_card_widget.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
-
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
-
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
-
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+  testWidgets('legacy card smoke', (tester) async {
+    const card = CardSummaryModel(
+      creditLimit: 5000,
+      currentBalance: 100,
+      available: 4900,
+      holderName: 'Test',
+      lastFour: '1234',
+      brand: 'Mastercard',
+      expiry: '01/30',
+    );
+    await tester.binding.setSurfaceSize(const Size(800, 1200));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+    await tester.pumpWidget(
+      const MaterialApp(home: Scaffold(body: LegacyCreditCardWidget(card: card))),
+    );
+    expect(find.text('Test'), findsOneWidget);
   });
 }
