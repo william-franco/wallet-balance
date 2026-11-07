@@ -5,6 +5,7 @@ import 'package:wallet_balance_app/src/features/wallet/models/card_summary_model
 import 'package:wallet_balance_app/src/features/wallet/widgets/legacy_credit_card_widget.dart';
 import 'package:wallet_balance_app/src/features/wallet/widgets/modern_credit_card_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:go_router/go_router.dart';
 
 class SettingView extends StatelessWidget {
@@ -29,6 +30,19 @@ class SettingView extends StatelessWidget {
       applicationName: 'Wallet Balance',
       applicationVersion: 'Version 1.0.0',
       applicationLegalese: '\u{a9} 2026 William Franco',
+      children: <Widget>[
+        const SizedBox(height: 16),
+        TextButton.icon(
+          icon: const Icon(Icons.code),
+          label: const Text('GitHub'),
+          onPressed: () {
+            launchUrl(
+              Uri.parse('https://github.com/william-franco'),
+              mode: LaunchMode.externalApplication,
+            );
+          },
+        ),
+      ],
     );
   }
 
