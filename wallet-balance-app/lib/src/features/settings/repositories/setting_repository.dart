@@ -1,8 +1,10 @@
 import 'package:wallet_balance_app/src/common/constants/value_constant.dart';
 import 'package:wallet_balance_app/src/common/services/storage_service.dart';
+import 'package:wallet_balance_app/src/common/services/url_launcher_service.dart';
 import 'package:wallet_balance_app/src/features/settings/models/setting_model.dart';
 
 abstract interface class SettingRepository {
+  Future<void> openUrl({required Uri url});
   Future<SettingModel> readSettings();
   Future<void> updateTheme({required bool isDarkTheme});
   Future<void> updateCardStyle({required CardStyle cardStyle});
@@ -11,7 +13,17 @@ abstract interface class SettingRepository {
 class SettingRepositoryImpl implements SettingRepository {
   final StorageService storageService;
 
-  SettingRepositoryImpl({required this.storageService});
+  final UrlLauncherService urlLauncherService;
+
+  SettingRepositoryImpl({
+    required this.storageService,
+    required this.urlLauncherService,
+  });
+
+  @override
+  Future<void> openUrl({required Uri url}) async {
+    await urlLauncherService.openUrl(url: url);
+  }
 
   @override
   Future<SettingModel> readSettings() async {
@@ -22,7 +34,9 @@ class SettingRepositoryImpl implements SettingRepository {
       final styleRaw = await storageService.getStringValue(
         key: ValueConstant.cardStyle,
       );
-      final cardStyle = styleRaw == 'modern' ? CardStyle.modern : CardStyle.legacy;
+      final cardStyle = styleRaw == 'modern'
+          ? CardStyle.modern
+          : CardStyle.legacy;
       return SettingModel(
         isDarkTheme: isDarkMode ?? false,
         cardStyle: cardStyle,

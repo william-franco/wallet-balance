@@ -10,8 +10,10 @@ import 'package:wallet_balance_app/src/features/wallet/models/transaction_model.
 
 typedef CardResult = ResultPattern<CardSummaryModel, WalletException>;
 typedef InvoiceResult = ResultPattern<InvoiceModel, WalletException>;
-typedef TransactionsResult = ResultPattern<List<TransactionModel>, WalletException>;
-typedef SpendingResult = ResultPattern<List<MerchantSpendingModel>, WalletException>;
+typedef TransactionsResult =
+    ResultPattern<List<TransactionModel>, WalletException>;
+typedef SpendingResult =
+    ResultPattern<List<MerchantSpendingModel>, WalletException>;
 typedef TransactionResult = ResultPattern<TransactionModel, WalletException>;
 
 abstract interface class WalletRepository {
@@ -53,7 +55,9 @@ class WalletRepositoryImpl implements WalletRepository {
         );
       }
       return ErrorResult(
-        error: WalletException('Falha ao carregar cartão: ${result.statusCode}'),
+        error: WalletException(
+          'Falha ao carregar cartão: ${result.statusCode}',
+        ),
       );
     } on WalletException catch (e) {
       return ErrorResult(error: e);
@@ -66,14 +70,18 @@ class WalletRepositoryImpl implements WalletRepository {
   Future<InvoiceResult> getCurrentInvoice() async {
     try {
       await _ensureConnected();
-      final result = await httpService.getData(path: ApiConstant.invoicesCurrent);
+      final result = await httpService.getData(
+        path: ApiConstant.invoicesCurrent,
+      );
       if (result.statusCode == 200 && result.data != null) {
         return SuccessResult(
           value: InvoiceModel.fromJson(result.data as Map<String, dynamic>),
         );
       }
       return ErrorResult(
-        error: WalletException('Falha ao carregar fatura: ${result.statusCode}'),
+        error: WalletException(
+          'Falha ao carregar fatura: ${result.statusCode}',
+        ),
       );
     } on WalletException catch (e) {
       return ErrorResult(error: e);
@@ -97,7 +105,9 @@ class WalletRepositoryImpl implements WalletRepository {
         return SuccessResult(value: list);
       }
       return ErrorResult(
-        error: WalletException('Falha ao carregar extrato: ${result.statusCode}'),
+        error: WalletException(
+          'Falha ao carregar extrato: ${result.statusCode}',
+        ),
       );
     } on WalletException catch (e) {
       return ErrorResult(error: e);
@@ -116,12 +126,16 @@ class WalletRepositoryImpl implements WalletRepository {
       final result = await httpService.getData(path: path);
       if (result.statusCode == 200 && result.data != null) {
         final list = (result.data as List)
-            .map((e) => MerchantSpendingModel.fromJson(e as Map<String, dynamic>))
+            .map(
+              (e) => MerchantSpendingModel.fromJson(e as Map<String, dynamic>),
+            )
             .toList();
         return SuccessResult(value: list);
       }
       return ErrorResult(
-        error: WalletException('Falha ao carregar gráfico: ${result.statusCode}'),
+        error: WalletException(
+          'Falha ao carregar gráfico: ${result.statusCode}',
+        ),
       );
     } on WalletException catch (e) {
       return ErrorResult(error: e);
@@ -153,7 +167,9 @@ class WalletRepositoryImpl implements WalletRepository {
         );
       }
       return ErrorResult(
-        error: WalletException('Falha ao registrar compra: ${result.statusCode}'),
+        error: WalletException(
+          'Falha ao registrar compra: ${result.statusCode}',
+        ),
       );
     } on WalletException catch (e) {
       return ErrorResult(error: e);

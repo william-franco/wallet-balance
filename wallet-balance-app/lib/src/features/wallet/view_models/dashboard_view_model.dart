@@ -28,29 +28,31 @@ class DashboardViewModelImpl extends StateManagement<DashboardScreenState>
 
   @override
   Future<void> loadDashboard() async {
-    _emit(state.copyWith(
-      card: const LoadingState(),
-      invoice: const LoadingState(),
-      transactions: const LoadingState(),
-      spending: const LoadingState(),
-    ));
+    _emit(
+      state.copyWith(
+        card: const LoadingState(),
+        invoice: const LoadingState(),
+        transactions: const LoadingState(),
+        spending: const LoadingState(),
+      ),
+    );
 
     final cardResult = await walletRepository.getCardSummary();
     final invoiceResult = await walletRepository.getCurrentInvoice();
     final txResult = await walletRepository.getTransactions();
     final spendingResult = await walletRepository.getSpendingByMerchant();
 
-    _emit(state.copyWith(
-      card: _map(cardResult),
-      invoice: _map(invoiceResult),
-      transactions: _mapList(txResult),
-      spending: _mapList(spendingResult),
-    ));
+    _emit(
+      state.copyWith(
+        card: _map(cardResult),
+        invoice: _map(invoiceResult),
+        transactions: _mapList(txResult),
+        spending: _mapList(spendingResult),
+      ),
+    );
   }
 
-  StatePattern<T, E> _map<T, E extends Exception>(
-    ResultPattern<T, E> result,
-  ) {
+  StatePattern<T, E> _map<T, E extends Exception>(ResultPattern<T, E> result) {
     return switch (result) {
       SuccessResult(:final value) => SuccessState(data: value),
       ErrorResult(:final error) => ErrorState(error: error),

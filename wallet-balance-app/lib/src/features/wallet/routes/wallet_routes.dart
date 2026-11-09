@@ -9,9 +9,8 @@ class WalletRoutes {
   List<RouteBase> get routes => [
     GoRoute(
       path: dashboard,
-      builder: (context, state) => DashboardView(
-        dashboardViewModel: locator<DashboardViewModel>(),
-      ),
+      builder: (context, state) =>
+          DashboardView(dashboardViewModel: locator<DashboardViewModel>()),
     ),
   ];
 }

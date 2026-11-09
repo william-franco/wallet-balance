@@ -8,6 +8,7 @@ typedef _ViewModel = StateManagement<SettingModel>;
 abstract interface class SettingViewModel extends _ViewModel {
   Future<void> loadSettings();
   Future<void> changeTheme({required bool isDarkTheme});
+  Future<void> openUrl({required Uri url});
   Future<void> changeCardStyle({required CardStyle cardStyle});
 }
 
@@ -15,9 +16,12 @@ class SettingViewModelImpl extends _ViewModel implements SettingViewModel {
   final SettingRepository settingRepository;
 
   SettingViewModelImpl({required this.settingRepository});
-
   @override
   SettingModel build() => SettingModel();
+
+  @override
+  Future<void> openUrl({required Uri url}) =>
+      settingRepository.openUrl(url: url);
 
   @override
   Future<void> loadSettings() async {

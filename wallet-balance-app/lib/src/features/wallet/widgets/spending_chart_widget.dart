@@ -28,15 +28,22 @@ class SpendingChartWidget extends StatelessWidget {
             gridData: const FlGridData(show: false),
             borderData: FlBorderData(show: false),
             titlesData: FlTitlesData(
-              topTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
-              rightTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
-              leftTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
+              topTitles: const AxisTitles(
+                sideTitles: SideTitles(showTitles: false),
+              ),
+              rightTitles: const AxisTitles(
+                sideTitles: SideTitles(showTitles: false),
+              ),
+              leftTitles: const AxisTitles(
+                sideTitles: SideTitles(showTitles: false),
+              ),
               bottomTitles: AxisTitles(
                 sideTitles: SideTitles(
                   showTitles: true,
                   getTitlesWidget: (value, meta) {
                     final i = value.toInt();
-                    if (i < 0 || i >= data.length) return const SizedBox.shrink();
+                    if (i < 0 || i >= data.length)
+                      return const SizedBox.shrink();
                     final label = data[i].merchant;
                     return Padding(
                       padding: const EdgeInsets.only(top: 8),
@@ -58,7 +65,9 @@ class SpendingChartWidget extends StatelessWidget {
                       toY: data[i].total,
                       color: Theme.of(context).colorScheme.primary,
                       width: 18,
-                      borderRadius: const BorderRadius.vertical(top: Radius.circular(6)),
+                      borderRadius: const BorderRadius.vertical(
+                        top: Radius.circular(6),
+                      ),
                     ),
                   ],
                 ),

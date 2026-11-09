@@ -52,7 +52,10 @@ class LegacyCreditCardWidget extends StatelessWidget {
                   children: [
                     Row(
                       children: [
-                        const Text('Gasto', style: TextStyle(color: Colors.white)),
+                        const Text(
+                          'Gasto',
+                          style: TextStyle(color: Colors.white),
+                        ),
                         const SizedBox(width: 8),
                         Expanded(
                           child: Text(

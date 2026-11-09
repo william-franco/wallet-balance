@@ -56,7 +56,9 @@ class _DashboardViewState extends State<DashboardView> {
             ),
             TextField(
               controller: amountCtrl,
-              keyboardType: const TextInputType.numberWithOptions(decimal: true),
+              keyboardType: const TextInputType.numberWithOptions(
+                decimal: true,
+              ),
               decoration: const InputDecoration(labelText: 'Valor'),
             ),
             TextField(
@@ -66,8 +68,14 @@ class _DashboardViewState extends State<DashboardView> {
           ],
         ),
         actions: [
-          TextButton(onPressed: () => Navigator.pop(ctx, false), child: const Text('Cancelar')),
-          FilledButton(onPressed: () => Navigator.pop(ctx, true), child: const Text('Salvar')),
+          TextButton(
+            onPressed: () => Navigator.pop(ctx, false),
+            child: const Text('Cancelar'),
+          ),
+          FilledButton(
+            onPressed: () => Navigator.pop(ctx, true),
+            child: const Text('Salvar'),
+          ),
         ],
       ),
     );
@@ -77,7 +85,9 @@ class _DashboardViewState extends State<DashboardView> {
     final amount = double.tryParse(amountCtrl.text.replaceAll(',', '.')) ?? 0;
     if (amount <= 0 || merchantCtrl.text.trim().isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Informe valor e estabelecimento válidos.')),
+        const SnackBar(
+          content: Text('Informe valor e estabelecimento válidos.'),
+        ),
       );
       return;
     }
@@ -90,7 +100,9 @@ class _DashboardViewState extends State<DashboardView> {
     if (mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(success ? 'Compra registrada.' : 'Erro ao registrar compra.'),
+          content: Text(
+            success ? 'Compra registrada.' : 'Erro ao registrar compra.',
+          ),
         ),
       );
     }
@@ -136,14 +148,24 @@ class _DashboardViewState extends State<DashboardView> {
                 _buildInvoiceSection(screenState.invoice, currency, dateFmt),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(16, 24, 16, 8),
-                  child: Text('Gastos por estabelecimento', style: Theme.of(context).textTheme.titleMedium),
+                  child: Text(
+                    'Gastos por estabelecimento',
+                    style: Theme.of(context).textTheme.titleMedium,
+                  ),
                 ),
                 _buildChartSection(screenState.spending),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(16, 24, 16, 8),
-                  child: Text('Extrato', style: Theme.of(context).textTheme.titleMedium),
+                  child: Text(
+                    'Extrato',
+                    style: Theme.of(context).textTheme.titleMedium,
+                  ),
                 ),
-                _buildTransactionsSection(screenState.transactions, currency, dateFmt),
+                _buildTransactionsSection(
+                  screenState.transactions,
+                  currency,
+                  dateFmt,
+                ),
               ],
             );
           },
@@ -152,7 +174,9 @@ class _DashboardViewState extends State<DashboardView> {
     );
   }
 
-  Widget _buildCardSection(StatePattern<CardSummaryModel, WalletException> cardState) {
+  Widget _buildCardSection(
+    StatePattern<CardSummaryModel, WalletException> cardState,
+  ) {
     return switch (cardState) {
       InitialState() || LoadingState() => const SizedBox(
         height: 220,
@@ -162,14 +186,15 @@ class _DashboardViewState extends State<DashboardView> {
         padding: const EdgeInsets.all(16),
         child: Text(error.message),
       ),
-      SuccessState(:final data) => StateBuilderWidget<SettingViewModel, SettingModel>(
-        viewModel: locator<SettingViewModel>(),
-        builder: (context, settings) {
-          return settings.cardStyle == CardStyle.modern
-              ? ModernCreditCardWidget(card: data)
-              : LegacyCreditCardWidget(card: data);
-        },
-      ),
+      SuccessState(:final data) =>
+        StateBuilderWidget<SettingViewModel, SettingModel>(
+          viewModel: locator<SettingViewModel>(),
+          builder: (context, settings) {
+            return settings.cardStyle == CardStyle.modern
+                ? ModernCreditCardWidget(card: data)
+                : LegacyCreditCardWidget(card: data);
+          },
+        ),
     };
   }
 
@@ -191,7 +216,10 @@ class _DashboardViewState extends State<DashboardView> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('Fatura atual', style: Theme.of(context).textTheme.titleMedium),
+              Text(
+                'Fatura atual',
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
               const SizedBox(height: 8),
               Text('Total: ${currency.format(data.totalAmount)}'),
               Text('Vencimento: ${dateFmt.format(data.dueDate)}'),
@@ -203,7 +231,9 @@ class _DashboardViewState extends State<DashboardView> {
     };
   }
 
-  Widget _buildChartSection(StatePattern<List<MerchantSpendingModel>, WalletException> state) {
+  Widget _buildChartSection(
+    StatePattern<List<MerchantSpendingModel>, WalletException> state,
+  ) {
     return switch (state) {
       InitialState() || LoadingState() => const SizedBox(
         height: 200,
@@ -241,7 +271,9 @@ class _DashboardViewState extends State<DashboardView> {
             ListTile(
               leading: const Icon(Icons.receipt_long_outlined),
               title: Text(tx.merchant),
-              subtitle: Text('${dateFmt.format(tx.occurredAt)} · ${tx.description}'),
+              subtitle: Text(
+                '${dateFmt.format(tx.occurredAt)} · ${tx.description}',
+              ),
               trailing: Text(currency.format(tx.amount)),
             ),
         ],

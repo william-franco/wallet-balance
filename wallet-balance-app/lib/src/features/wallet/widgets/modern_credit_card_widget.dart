@@ -40,12 +40,14 @@ class ModernCreditCardWidget extends StatelessWidget {
               children: [
                 Text(
                   card.brand,
-                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                    color: Colors.white70,
-                    letterSpacing: 1.2,
-                  ),
+                  style: Theme.of(context).textTheme.titleMedium
+                      ?.copyWith(color: Colors.white70, letterSpacing: 1.2),
                 ),
-                const Icon(Icons.contactless_outlined, color: Colors.white, size: 32),
+                const Icon(
+                  Icons.contactless_outlined,
+                  color: Colors.white,
+                  size: 32,
+                ),
               ],
             ),
             const SizedBox(height: 24),
@@ -53,10 +55,8 @@ class ModernCreditCardWidget extends StatelessWidget {
             const SizedBox(height: 16),
             Text(
               '•••• •••• •••• ${card.lastFour}',
-              style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                color: Colors.white,
-                letterSpacing: 2,
-              ),
+              style: Theme.of(context).textTheme.titleLarge
+                  ?.copyWith(color: Colors.white, letterSpacing: 2),
             ),
             const SizedBox(height: 8),
             Text(
@@ -64,7 +64,10 @@ class ModernCreditCardWidget extends StatelessWidget {
               style: const TextStyle(color: Colors.white70),
             ),
             const SizedBox(height: 4),
-            Text('Validade ${card.expiry}', style: const TextStyle(color: Colors.white54)),
+            Text(
+              'Validade ${card.expiry}',
+              style: const TextStyle(color: Colors.white54),
+            ),
             const SizedBox(height: 20),
             ClipRRect(
               borderRadius: BorderRadius.circular(8),
@@ -72,7 +75,9 @@ class ModernCreditCardWidget extends StatelessWidget {
                 value: percent,
                 minHeight: 8,
                 backgroundColor: Colors.white24,
-                color: percent > 0.85 ? Colors.orangeAccent : Colors.lightGreenAccent,
+                color: percent > 0.85
+                    ? Colors.orangeAccent
+                    : Colors.lightGreenAccent,
               ),
             ),
             const SizedBox(height: 8),
