@@ -1,5 +1,5 @@
 import 'package:fl_chart/fl_chart.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:wallet_balance_app/src/features/wallet/models/merchant_spending_model.dart';
 
 class SpendingChartWidget extends StatelessWidget {
