@@ -56,6 +56,28 @@ dotnet build
 dotnet run
 ```
 
+## Integration tests (E2E)
+
+```
+cd WalletBalanceBackend.IntegrationTests
+dotnet test --configuration Release
+```
+
+Monorepo: `./flutter-backend-e2e.sh test wallet-balance` · smoke: `./flutter-backend-e2e.sh smoke wallet-balance`.
+
+## Run with Kiri (Docker)
+
+Com o Kiri ativo, na pasta deste backend:
+
+```
+kiri compose build
+kiri compose up -d
+```
+
+Ou: `./flutter-backend-kiri.sh up wallet-balance` (monorepo `flutter-apps`).
+
+SQLite em volume; `Development` com Scalar. Encerrar: `kiri compose down`.
+
 ## Accessing
 
 API: http://localhost:5268/api/v1 · OpenAPI: http://localhost:5268/openapi/v1.json · Scalar: http://localhost:5268/scalar

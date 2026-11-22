@@ -1,0 +1,14 @@
+services:
+  api:
+    build: .
+    image: wallet-balance-backend:local
+    ports:
+      - "5268:8080"
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ConnectionStrings__Default: Data Source=/data/walletbalance.db
+    volumes:
+      - wallet_balance_sqlite:/data
+
+volumes:
+  wallet_balance_sqlite:

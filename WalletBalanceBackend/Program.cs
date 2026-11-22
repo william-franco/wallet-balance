@@ -780,3 +780,5 @@ record InvoiceDto(
 }
 
 record MerchantSpendingDto(string Merchant, decimal Total);
+
+public partial class Program;
