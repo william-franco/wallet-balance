@@ -116,6 +116,15 @@ flowchart TD
 4. Registre compras ou atualize com pull-to-refresh / ícone na AppBar
 5. Escolha tema e estilo do cartão em Configurações
 
+## E2E Flutter (Linux)
+
+- **CI:** o job Flutter roda `integration_test` em smoke (`CI_SMOKE`) com `xvfb`, sem subir a API (integração HTTP fica no job `backend-integration` com `dotnet test`).
+- **Local com API:** na pasta `flutter-apps`, suba o backend (`./flutter-backend-kiri.sh up wallet-balance` ou `dotnet run` em `WalletBalanceBackend`) e execute em `wallet-balance-app`:
+
+```bash
+flutter test integration_test -d linux
+```
+
 ## Examples of commits
 
 ```

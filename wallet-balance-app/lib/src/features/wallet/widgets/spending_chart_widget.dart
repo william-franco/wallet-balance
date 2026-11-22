@@ -42,8 +42,9 @@ class SpendingChartWidget extends StatelessWidget {
                   showTitles: true,
                   getTitlesWidget: (value, meta) {
                     final i = value.toInt();
-                    if (i < 0 || i >= data.length)
+                    if (i < 0 || i >= data.length) {
                       return const SizedBox.shrink();
+                    }
                     final label = data[i].merchant;
                     return Padding(
                       padding: const EdgeInsets.only(top: 8),
