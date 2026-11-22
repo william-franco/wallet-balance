@@ -43,6 +43,10 @@ A API REST sobe em `http://localhost:5268/api/v1`. O banco é criado/atualizado 
 
 Para migrations, pacotes e Scalar, consulte [`WalletBalanceBackend/README.md`](WalletBalanceBackend/README.md).
 
+#### Backend com Kiri (Docker)
+
+Alternativa ao `dotnet run`: com [Kiri](https://kiri.dev) ativo, em `WalletBalanceBackend` execute `kiri compose up -d` (API em **http://localhost:5268/api/v1**). Na pasta do monorepo `flutter-apps`: `./flutter-backend-kiri.sh up wallet-balance`. Ver [Run with Kiri (Docker)](WalletBalanceBackend/README.md#run-with-kiri-docker) no README do backend.
+
 ### 2. App Flutter
 
 ```bash

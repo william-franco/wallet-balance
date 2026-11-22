@@ -4,6 +4,8 @@ Backend para o projeto Wallet Balance: autenticação JWT com refresh token, car
 
 No registro (`POST /auth/register`), o backend cria cartão e dados demo (transações) para o usuário.
 
+Execução local com `dotnet run` ou em container via **Kiri** (seção [Run with Kiri (Docker)](#run-with-kiri-docker) abaixo).
+
 ## API (domínio)
 
 Base: `http://localhost:5268/api/v1` (rotas abaixo são relativas a esse prefixo).
@@ -58,25 +60,31 @@ dotnet run
 
 ## Integration tests (E2E)
 
+Testes de integração da API (xUnit + `WebApplicationFactory`, SQLite temporário):
+
 ```
 cd WalletBalanceBackend.IntegrationTests
 dotnet test --configuration Release
 ```
 
-Monorepo: `./flutter-backend-e2e.sh test wallet-balance` · smoke: `./flutter-backend-e2e.sh smoke wallet-balance`.
+No monorepo `flutter-apps`: `./flutter-backend-e2e.sh test wallet-balance` (só .NET) ou `./flutter-backend-e2e.sh smoke wallet-balance` (container + HTTP).
 
 ## Run with Kiri (Docker)
 
-Com o Kiri ativo, na pasta deste backend:
+Com o [Kiri](https://kiri.dev) ativo (no Linux: `sudo kiri daemon` ou app aberto), na pasta deste backend:
 
 ```
 kiri compose build
 kiri compose up -d
 ```
 
-Ou: `./flutter-backend-kiri.sh up wallet-balance` (monorepo `flutter-apps`).
+Ou a partir da raiz do monorepo `flutter-apps`: `./flutter-backend-kiri.sh up wallet-balance`.
 
-SQLite em volume; `Development` com Scalar. Encerrar: `kiri compose down`.
+O SQLite persiste no volume Docker; ambiente `Development` (Scalar/OpenAPI habilitados). Portas no host permanecem as mesmas abaixo.
+
+Para encerrar: `kiri compose down` ou `./flutter-backend-kiri.sh down wallet-balance`.
+
+Opcional: `Jwt__Key` e demais chaves podem ser sobrescritas via `environment` no `compose.yaml`.
 
 ## Accessing
 
